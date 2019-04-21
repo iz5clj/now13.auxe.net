@@ -1,0 +1,11 @@
+ <!-- Bootstrap from sass -->
+ {{- $myBootstrap := resources.Get "sass/bootstrap/bootstrap.scss" -}}
+ {{- $options := (dict "targetPath" "css/myBootstrap.css") -}}
+ {{- $myBootstrapCss := $myBootstrap | resources.ToCSS $options | minify | fingerprint -}}
+ <link rel="stylesheet" href="{{ $myBootstrapCss.RelPermalink }}">
+
+ <!-- NOW UI Kit CSS -->
+{{- $myUiKit := resources.Get "sass/now-ui-kit.scss" -}}
+{{- $options := (dict "targetPath" "css/myUiKit.css") -}}
+{{- $myUiCss := $myUiKit | resources.ToCSS $options | minify | fingerprint -}}
+<link rel="stylesheet" href="{{ $myUiCss.RelPermalink }}">
