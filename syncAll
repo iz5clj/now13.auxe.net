@@ -1,0 +1,6 @@
+#!/bin/bash
+rm -Rf public/
+hugo
+gulp minify
+rsync -azP ./public/ ocean01:now13.auxe.net --delete
+

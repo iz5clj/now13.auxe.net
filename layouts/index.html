@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>starter template</title>
+
+    <!-- Bootstrap from sass -->
+    {{- $myBootstrap := resources.Get "sass/bootstrap/bootstrap.scss" -}}
+    {{- $options := (dict "targetPath" "css/myBootstrap.css") -}}
+    {{- $myBootstrapCss := $myBootstrap | resources.ToCSS $options | minify | fingerprint -}}
+    <link rel="stylesheet" href="{{ $myBootstrapCss.RelPermalink }}">
+
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col">
+                test 1
+            </div>
+            <div class="col">
+                test 2
+            </div>
+            <div class="col">
+                test 3
+            </div>
+            <div class="col">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Dropdown button
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p>Col 1 Ligne 2</p>
+            </div>
+            <div class="col">
+                <p>Col 2 Ligne 2</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card bg-dark text-white">
+                <img class="card-img" src="images/image.jpg" alt="Card image">
+                <!-- <div class="card-img-overlay">
+                  <h5 class="card-title"></h5>
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <p class="card-text">Last updated 3 mins ago</p>
+                </div> -->
+              </div>
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/popper.js"></script>
+    <script src="scripts/bootstrap.js"></script>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    {{ $jquery := resources.Get "js/jquery.js" }}
+    {{ $popper := resources.Get "js/popper.js" }}
+    {{ $bootstrap := resources.Get "js/bootstrap.js" }}
+    {{ $global_js := slice $jquery $popper $bootstrap | resources.Concat "js/global.js" | minify | fingerprint }}
+    <script type="text/javascript" src="{{ $global_js.Permalink }}" integrity="{{ $global_js.Data.Integrity }}"></script>
+
+</body>
+</html>
