@@ -6,7 +6,7 @@ var print = require('gulp-print').default;
 gulp.task('copy_bootstrap_sass', function() {
     gulp.src('node_modules/bootstrap/scss/**/*')
     .pipe(gulp.dest('assets/sass/bootstrap/'))
-    .pipe(print())
+    //.pipe(print())
     .pipe(count('### files processed.'));
 });
 
@@ -17,7 +17,7 @@ gulp.task('copy_js', function() {
         'node_modules/bootstrap/dist/js/bootstrap.js'
     ])
     .pipe(gulp.dest('assets/js/'))
-    .pipe(print())
+    //.pipe(print())
     .pipe(count('## files have been copied'));
 });
 
@@ -27,7 +27,7 @@ gulp.task('minify', () => {
             collapseWhitespace: true
         }))
         .pipe(gulp.dest('public'))
-        .pipe(print())
+        //.pipe(print())
         .pipe(count('## files processed.'));
 });
 
